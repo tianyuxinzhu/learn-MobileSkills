@@ -84,7 +84,30 @@
 在智能手机的普及下，很多网站都具备`桌面端`和`移动端`两种浏览版本，因此无需双击缩放查看页面。禁止页面缩放可保障`移动端浏览器`能无遗漏地展现页面所有布局。
 
 ```html
+<!-- ios10+ 无效 -->
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1">
+```
+
+```js
+// 解决safari自带放大功能：阻止双击放大
+let lastTime = 0;
+document.addEventListener("touchstart", function(event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+});
+document.addEventListener("touchend", function(event) {
+    let nowTime = (new Date()).getTime();
+    if (nowTime - lastTime <= 300) {
+        event.preventDefault();
+    }
+    lastTime = nowTime;
+}, false);
+
+// 解决safari自带放大功能：阻止双指放大
+document.addEventListener("gesturestart", function(event) {
+    event.preventDefault();
+});
 ```
 
 ### 禁止页面缓存
@@ -108,6 +131,9 @@
 贴一些`Safari`较零散且少用的配置。
 
 ```html
+<!-- set the color of the address bar on mobile devices -->
+<meta name="theme-color" content="#0072ce">
+
 <!-- 设置Safari全屏，在iOS7+无效 -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 
