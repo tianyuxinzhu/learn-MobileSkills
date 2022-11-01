@@ -84,7 +84,7 @@
 在智能手机的普及下，很多网站都具备`桌面端`和`移动端`两种浏览版本，因此无需双击缩放查看页面。禁止页面缩放可保障`移动端浏览器`能无遗漏地展现页面所有布局。
 
 ```html
-<!-- ios10+ 无效 -->
+<!-- ios10+无效, 但可解决 click 300ms 延迟问题 -->
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1">
 ```
 
